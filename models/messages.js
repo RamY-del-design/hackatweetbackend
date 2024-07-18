@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 const messageSchema = mongoose.Schema({
- author: String, // Clé étrangère ---à définir---
- dateCreate: Date, // Date de création
- message: String, // Contenu du message
- tags: String, // Clé enfant ---à définir---
- nbLike: Number, // Nombre de like
+ author: { type: mongoose.Schema.Types.ObjectId, ref: 'users' }, // Clé étrangère vers les users
+ dateCreate: Date,                                               // Date de création
+ message: String,                                                // Contenu du message
+ nbLike: Number,                                                 // Nombre de like
+ tags: [{ type: mongoose.Schema.Types.ObjectId, ref: 'tags' }],  // Tableau de clés étrangère vers les tags
 });
 
 const Messages = mongoose.model('messages', messageSchema);
