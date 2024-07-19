@@ -10,7 +10,9 @@ const Message = require('../models/messages');
 const Tag = require('../models/tags');
 
 router.get('/', (req, res) => {
-    Message.find().then(data => {
+    Message.find()
+    .populate({path:'author'})
+    .then(data => {
       if (data) {
         res.json({ result: true, messages: data });
       } else {
